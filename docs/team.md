@@ -6,8 +6,8 @@ title:  Team
 # {{ page.title }}
 
 
-## USER 1
-***UCI Net ID***: ucinetid1
+## Mikhail Shcherbakov
+***UCI Net ID***: 75202533
 
 ## USER 2
 ***UCI Net ID***: ucinetid2
