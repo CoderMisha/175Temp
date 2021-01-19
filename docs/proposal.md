@@ -15,5 +15,5 @@ We anticipate using reinforcement learning with neural function approximators, a
   Our sanity case would be if there is a plain line of blocks to our goal, our agent can just run through in a line, and it would not choose other paths. We are also considering testing a 2D grid of blocks and lava to make sure our agent reasons and behaves properly before it is required to act in three dimensions. Visualization can be achieved by drawing out the agent’s path and color-coordinating the path color by its evaluation score for that path. Our moonshot case would be that the agent would be able to jump through a series of blocks and save itself by placing blocks or the water bucket if the distance between two blocks is too far, or create its own path to the goal utilizing the blocks it is given.
   
  ## Appointment
- 4:30pm - 4:45pm, Friday, January 22, 2021
+  4:30pm - 4:45pm, Friday, January 22, 2021
  
