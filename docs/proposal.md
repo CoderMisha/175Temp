@@ -3,6 +3,8 @@ layout: default
 title:  Proposal
 ---
 
+# {{page.title}}
+
 ## Summary
   Our project’s goal is to create an AI that can navigate a 3 dimensional parkour course from start to end in an efficient and quick manner. The input will be a set of blocks in a small radius around the agent that are part of a completable parkour course, a start and end position for the AI, and the number of blocks the AI has. The output will be a sequence of actions the AI makes to get from start to end. The AI will have the ability to walk, sprint, and jump as well as place blocks and water from a bucket to assist its traversal of the course. The course itself will be composed of solid blocks, iron bars, and ladders, along with lava and bottomless pits providing added danger.
 
