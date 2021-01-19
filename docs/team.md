@@ -9,8 +9,8 @@ title:  Team
 ## Mikhail Shcherbakov
 ***UCI Net ID***: shcherbm
 
-## USER 2
-***UCI Net ID***: ucinetid2
+## Alexander Mulligan
+***UCI Net ID***: mulligaa
 
 ## Ke Xu
 ***UCI Net ID***: kxu9
