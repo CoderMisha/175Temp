@@ -18,7 +18,7 @@ else:
 #fill in these parameters
 screenshot_counter = 1 #number to start counting screenshot names at
 current_user = "Misha" #Name attached to files so counters dont overlap
-world_path = "" #path to world file
+world_path = "" #path to world file, sometimes doesnt work and have to directly put in xml
 screenshots_path = "" #path to screenshot folder
 no_villagers_path = "" #path to folder of images without villagers
 villagers_path = "" #path to folder of images with villagers
