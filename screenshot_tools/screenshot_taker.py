@@ -24,7 +24,7 @@ no_villagers_path = "" #path to folder of images without villagers
 villagers_path = "" #path to folder of images with villagers
 pixel_width = 512
 pixel_height = 512
-time_limit = 1000000
+time_limit = 5000000
 port_number = 10000
 
 #you have to have mouse in window for screenshot
