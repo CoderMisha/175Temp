@@ -134,9 +134,14 @@ time.sleep(5)
 
 # Loop until mission ends:
 while world_state.is_mission_running:
-    x = np.random.randint(-99999, 99999)
-    z = np.random.randint(-99999, 99999)
-    agent_host.sendCommand("chat /tp {} 80 {}".format(x,z))
+    x = np.random.randint(200, 9999)
+    if np.random.randint(0,2) > 0:
+      x *= -1
+    z = np.random.randint(200, 9999)
+    if np.random.randint(0,2) > 0:
+      z *= -1
+
+    agent_host.sendCommand("chat /tp ~{} 90 ~{}".format(x,z))
     agent_host.sendCommand("chat /weather clear")
     time.sleep(1)
     agent_host.sendCommand("chat /kill @e[type=!player,r=200]")  
@@ -160,7 +165,7 @@ while world_state.is_mission_running:
     if cliffCheck[0] == 'air':
       validLocation = False
 
-    if playerSpace[0] == 'leaves':
+    if playerSpace[0] == 'leaves' or playerSpace[0] == 'air':
        validLocation = False
 
     if validLocation:
