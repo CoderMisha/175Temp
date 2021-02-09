@@ -165,7 +165,7 @@ while world_state.is_mission_running:
     if cliffCheck[0] == 'air':
       validLocation = False
 
-    if playerSpace[0] == 'leaves' or playerSpace[0] == 'air':
+    if playerSpace[0] == 'leaves' or playerSpace[0] == 'air' or playerSpace[0] == 'water':
        validLocation = False
 
     if validLocation:
