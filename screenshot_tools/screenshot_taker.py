@@ -17,7 +17,7 @@ else:
 
 #fill in these parameters
 screenshot_counter = 1 #number to start counting screenshot names at
-current_user = "Misha" #Name attached to files so counters dont overlap
+current_user = "M" #Name attached to files so counters dont overlap (change this to your first initial/name)
 world_path = "" #path to world file, sometimes doesnt work and have to directly put in xml
 screenshots_path = "" #path to screenshot folder
 no_villagers_path = "" #path to folder of images without villagers
@@ -177,7 +177,7 @@ while world_state.is_mission_running:
       for i in range(1,np.random.randint(4, 6)):
           x = np.random.beta(4, 3)*10
           z = np.random.normal(0, 2.5)
-          agent_host.sendCommand("chat /summon villager ~{} ~5 ~{} {{Rotation:[90f,0f], Profession:1}}".format(x,z))
+          agent_host.sendCommand("chat /summon villager ~{} ~5 ~{} {{Rotation:[90f,0f], Profession:0}}".format(x,z))
       time.sleep(2.5)
       
       keyboard.press(Key.f2)
