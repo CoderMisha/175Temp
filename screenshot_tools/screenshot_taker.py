@@ -174,7 +174,7 @@ while world_state.is_mission_running:
       time.sleep(0.5)
 
       villagerLocations = []
-      for i in range(1,np.random.randint(3, 5)):
+      for i in range(1,np.random.randint(4, 6)):
           x = np.random.beta(4, 3)*10
           z = np.random.normal(0, 2.5)
           agent_host.sendCommand("chat /summon villager ~{} ~5 ~{} {{Rotation:[90f,0f], Profession:1}}".format(x,z))
