@@ -22,8 +22,8 @@ world_path = "" #path to world file, sometimes doesnt work and have to directly 
 screenshots_path = "" #path to screenshot folder
 no_villagers_path = "" #path to folder of images without villagers
 villagers_path = "" #path to folder of images with villagers
-pixel_width = 512
-pixel_height = 512
+pixel_width = 256
+pixel_height = 256
 time_limit = 5000000
 port_number = 10000
 
