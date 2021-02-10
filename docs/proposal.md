@@ -19,3 +19,5 @@ We anticipate using reinforcement learning with neural function approximators, a
 ## Appointment
 4:30pm - 4:45pm, Friday, January 22, 2021
  
+## Team Meetings
+Monday and Friday at 4:00pm
