@@ -2,16 +2,26 @@
 layout: default
 title:  Home
 ---
+## Project Description
 
-Source code: https://github.com/CoderMisha/Hardcore-Parkour
+
+<img src="assets/Before_After_Eraser.png" alt="Villager Eraser Before After">
+## Source code
+https://github.com/CoderMisha/Hardcore-Parkour
 
 Reports:
+- [Proposal](proposal.html)
+- [Status](status.html)
+- [Final](final.html)
+
 
 - [Proposal](proposal.html)
 - [Status](status.html)
 - [Final](final.html)
 
-<img src="assets/Before_After_Eraser.png" alt="Villager Eraser Before After">
+Source code: https://github.com/CoderMisha/Hardcore-Parkour
+
+
 
 What's Markdown (`.md`)?
 
