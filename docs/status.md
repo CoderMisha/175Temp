@@ -2,6 +2,7 @@
 layout: default
 title: Status
 ---
+# {{page.title}}
 
 ## Project Summary
 
