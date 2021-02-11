@@ -5,7 +5,7 @@ title:  Home
 ## Project Description
 The goal of this project is to create a machine learning algorithm that will be able to remove villagers and other mobs from images taken in minecraft.
 
-<img src="assets/Before_After_Eraser.png" alt="Villager Eraser Before After">
+![Villager Eraser Before After](assets/Before_After_Eraser.png)
 
 ## Source code
 https://github.com/CoderMisha/Hardcore-Parkour
