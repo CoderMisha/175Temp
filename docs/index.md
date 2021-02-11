@@ -7,7 +7,8 @@ The goal of this project is to create a machine learning algorithm that will be 
 
 <img src="assets/Before_After_Eraser.png" alt="Villager Eraser Before After">
 
-## Source code: https://github.com/CoderMisha/Hardcore-Parkour
+## Source code
+[https://github.com/CoderMisha/Hardcore-Parkour][https://github.com/CoderMisha/Hardcore-Parkour]
 
 Reports:
 - [Proposal](proposal.html)
