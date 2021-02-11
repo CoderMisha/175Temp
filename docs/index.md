@@ -6,6 +6,7 @@ title:  Home
 
 
 <img src="assets/Before_After_Eraser.png" alt="Villager Eraser Before After">
+
 ## Source code
 https://github.com/CoderMisha/Hardcore-Parkour
 
@@ -13,14 +14,6 @@ Reports:
 - [Proposal](proposal.html)
 - [Status](status.html)
 - [Final](final.html)
-
-
-- [Proposal](proposal.html)
-- [Status](status.html)
-- [Final](final.html)
-
-Source code: https://github.com/CoderMisha/Hardcore-Parkour
-
 
 
 What's Markdown (`.md`)?
