@@ -11,6 +11,8 @@ Reports:
 - [Status](status.html)
 - [Final](final.html)
 
+<img src="assets/Before_After_Eraser.png" alt="Villager Eraser Before After">
+
 What's Markdown (`.md`)?
 
 Markdown is markup that lets you write hypertext (HTML) documents
