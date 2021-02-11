@@ -7,7 +7,7 @@ title:  Home
 
 <img src="assets/Before_After_Eraser.png" alt="Villager Eraser Before After">
 
-Source code: https://github.com/CoderMisha/Hardcore-Parkour
+## Source code: https://github.com/CoderMisha/Hardcore-Parkour
 
 Reports:
 - [Proposal](proposal.html)
