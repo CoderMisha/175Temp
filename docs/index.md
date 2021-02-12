@@ -2,18 +2,21 @@
 layout: default
 title:  Home
 ---
+![Villager Eraser Before After](assets/Before_After_Eraser.png)
 ## Project Description
 The goal of this project is to create a machine learning algorithm that will be able to remove villagers and other mobs from images taken in minecraft.
 
-![Villager Eraser Before After](assets/Before_After_Eraser.png)
+![villager_history](assets/villager_history.png)
 
-## Source code
-https://github.com/CoderMisha/Hardcore-Parkour
-
-Reports:
+## Explore our Progress:
 - [Proposal](proposal.html)
 - [Status](status.html)
 - [Final](final.html)
+
+## Source code
+[https://github.com/CoderMisha/Hardcore-Parkour](https://github.com/CoderMisha/Hardcore-Parkour)
+
+![villager_history](assets/villager_history.png)
 
 
 What's Markdown (`.md`)?
