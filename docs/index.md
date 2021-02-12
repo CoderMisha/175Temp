@@ -6,8 +6,6 @@ title:  Home
 ## Project Description
 The goal of this project is to create a machine learning algorithm that will be able to remove villagers and other mobs from images taken in minecraft.
 
-![villager_history](assets/villager_history.png)
-
 ## Explore our Progress:
 - [Proposal](proposal.html)
 - [Status](status.html)
