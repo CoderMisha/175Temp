@@ -15,24 +15,24 @@ title: Status
   Maybe a picture of the model structure here + caption?
   
 ## Evaluation
-  As mentioned earlier, the model was tested on 25% of our collected data that we set aside to evaluate its performance. Our two main quantitative metrics we used to evaluate the autoencoder’s performance were binary accuracy between image pixels and mean squared error between the expected and reconstructed images. One point of evaluation was checking the recorded accuracy and mean squared error values we recorded during our training epochs to ensure the model was training properly, showing clear progress, and was not overfitting or underfitting the data.
-  Picture here of the accuracy of the model while training + caption
+As mentioned earlier, the model was tested on 25% of our collected data that we set aside to evaluate its performance. Our two main quantitative metrics we used to evaluate the autoencoder’s performance were binary accuracy between image pixels and mean squared error between the expected and reconstructed images. One point of evaluation was checking the recorded accuracy and mean squared error values we recorded during our training epochs to ensure the model was training properly, showing clear progress, and was not overfitting or underfitting the data.
+![Accuracy2k](assets/Accuracy2k.PNG)
   
 Additionally, we also visually inspected the recreated images and compared them to the expected result to see how the model was improving and how effective the output was to a human observer, as the whole premise of the project is to remove mobs from screenshots to help people create better and less cluttered images.
-	Picture here of the sample images + caption
+![SampleCAE18](assets/SampleCAE18.PNG)
 
 ## Remaining Goals and Challenges
-  Our convolutional autoencoder prototype serves as a great functioning base case, but it is a bit lackluster when it comes to the quality and accuracy of the reproduced images. In the coming weeks, we aim to surpass its abilities by creating a generative adversarial network with a modified U-Net generator and PatchGAN discriminator as our final model. Then, our CAE will serve as a nice baseline to compare our better model to.
-	Another major goal for the final report is to create and train our GAN to predict images with all mobs and not just villagers, and to possibly increase the resolution of our images to 512 x 512 or 1024 x 1024 pixels and improve our model to be able to produce images that are more clear at these resolutions. We did not run into too many issues so far besides understanding how to capture fixed size screenshots with malmo. We still may improve the script to be more stable as well.  Since minecraft has a large array of different mobs, it may pose a problem to be able to remove them all. We plan to overcome this by generating a larger dataset earlier and possibly limiting the types of mobs if removal proves too difficult. Additionally, the GAN likely will prove challenging to implement successfully and effectively, so we plan to conduct a lot of research and construct several simpler prototypes and test with small datasets of a few images before scaling up to a full GAN and full dataset.
+Our convolutional autoencoder prototype serves as a great functioning base case, but it is a bit lackluster when it comes to the quality and accuracy of the reproduced images. In the coming weeks, we aim to surpass its abilities by creating a generative adversarial network with a modified U-Net generator and PatchGAN discriminator as our final model. Then, our CAE will serve as a nice baseline to compare our better model to.
+
+Another major goal for the final report is to create and train our GAN to predict images with all mobs and not just villagers, and to possibly increase the resolution of our images to 512 x 512 or 1024 x 1024 pixels and improve our model to be able to produce images that are more clear at these resolutions. We did not run into too many issues so far besides understanding how to capture fixed size screenshots with malmo. We still may improve the script to be more stable as well.  Since minecraft has a large array of different mobs, it may pose a problem to be able to remove them all. We plan to overcome this by generating a larger dataset earlier and possibly limiting the types of mobs if removal proves too difficult. Additionally, the GAN likely will prove challenging to implement successfully and effectively, so we plan to conduct a lot of research and construct several simpler prototypes and test with small datasets of a few images before scaling up to a full GAN and full dataset.
 
 ## Resources Used
-https://microsoft.github.io/malmo/0.30.0/Schemas/MissionHandlers.html#type_GridDefinition
-https://minecraft.gamepedia.com/Game_rule
-https://www.youtube.com/watch?v=FEB8nUzwCSA&feature=youtu.be
-http://microsoft.github.io/malmo/0.30.0/Documentation/
-https://microsoft.github.io/malmo/0.21.0/Schemas/MissionHandlers.html
-https://www.tensorflow.org/tutorials/generative/autoencoder
-Malmo depth_map_runner.py sample
-Python packages: TensorFlow 2.1.0, Numpy 1.18.1, Pillow 5.4.1, Matplotlib 3.2.1
-Python version 3.7.2
+- https://microsoft.github.io/malmo/0.30.0/Schemas/MissionHandlers.html#type_GridDefinition
+- https://minecraft.gamepedia.com/Game_rule
+- https://www.youtube.com/watch?v=FEB8nUzwCSA&feature=youtu.be
+- http://microsoft.github.io/malmo/0.30.0/Documentation/
+- https://microsoft.github.io/malmo/0.21.0/Schemas/MissionHandlers.html
+- https://www.tensorflow.org/tutorials/generative/autoencoder
+- Malmo depth_map_runner.py sample
+- Python packages: TensorFlow 2.1.0, Numpy 1.18.1, Pillow 5.4.1, Matplotlib 3.2.1
 
