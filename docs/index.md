@@ -12,7 +12,7 @@ The goal of this project is to create a machine learning algorithm that will be 
 - [Final](final.html)
 
 ## Source code
-[https://github.com/CoderMisha/Tourist-Eraser](https://github.com/CoderMisha/Tourist-Eraser)
+[https://github.com/CoderMisha/Mob-Eraser](https://github.com/CoderMisha/Mob-Eraser)
 
 ![villager_history](assets/villager_history.png)
 
