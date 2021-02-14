@@ -11,6 +11,8 @@ title:  Home
 - ### [Status](status.html)
 - ### [Final](final.html)
 
+![Sample_Images](assets/SampleCAE18.PNG)
+
 ## Source code:
 ### [https://github.com/CoderMisha/Mob-Eraser](https://github.com/CoderMisha/Mob-Eraser)
 
