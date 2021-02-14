@@ -14,14 +14,14 @@ The first step was obtaining a large dataset of paired images with and without v
 
 *Fig.1 An example of an image pair, one of many used to train and test the model.*
   
-We created a convolutional autoencoder as a baseline model to perform our task. In our model, the encoder took an (256,256,3) tensor as input and was made up of several Conv2D layers with increasing filter size and stride 2 and kernel (2,2), to help with checkerboarding in the reconstruction. The output of the convolutions was then flattened and went through two dense layers to arrive at our latent space representation, which we chose to set at a dimension of 256. The models decoder structure took this latent space vector and passed it through a couple dense layers, and then through some Conv2DTranspose layers that mirrored the encoder’s Conv2D layers, resulting in a reconstructed image of the same size, (256,256,3). Our model was compiled with the Adam optimizer with a learning rate of 0.001 and the mean squared error loss function. The model was then trained with 75% of our collected data for 1000 epochs, where validation was performed using the remaining 25% of the data. As the model trained, we recorded the accuracy and mean squared error for each epoch.
+We created a convolutional autoencoder as a baseline model to perform our task. In our model, the encoder took an (256,256,3) tensor as input and was made up of several Conv2D layers with increasing filter size and stride 2 and kernel (2,2), to help with checkerboarding in the reconstruction. The output of the convolutions was then flattened and went through two dense layers to arrive at our compressed latent space representation, which we chose to set at a dimension of 256. The models decoder structure took this latent space vector and passed it through a couple dense layers, and then through some Conv2DTranspose layers that mirrored the encoder’s Conv2D layers and upscaled the compressed representation, resulting in a reconstructed image of the same size, (256,256,3). Our model was compiled with the Adam optimizer with a learning rate of 0.001 and the mean squared error loss function. The model was then trained with 75% of our collected data for 1000 epochs, where validation was performed using the remaining 25% of the data. As the model trained, we recorded the accuracy and mean squared error for each epoch.
   
 ## Evaluation
 As mentioned earlier, the model was tested on 25% of our collected data that we set aside to evaluate its performance. Our two main quantitative metrics we used to evaluate the autoencoder’s performance were binary accuracy between image pixels and mean squared error between the expected and reconstructed images. One point of evaluation was checking the recorded accuracy and mean squared error values we recorded during our training epochs to ensure the model was training properly, showing clear progress, and was not overfitting or underfitting the data.
 
-![Accuracy2k](assets/Accuracy2k.PNG)
+![Accuracy2k](assets/Accuracy2k.PNG) ![MSE2k](assets/MSE.PNG)
 
-*Fig.2 Binary pixel accuracy of the CAE over its 1000 training epochs.*
+*Fig.2 Binary pixel accuracy and MSE of the CAE over its 1000 training epochs.*
   
 Additionally, we also visually inspected the recreated images and compared them to the expected result to see how the model was improving and how effective the output was to a human observer, as the whole premise of the project is to remove mobs from screenshots to help people create better and less cluttered images.
 
@@ -36,11 +36,10 @@ Another major goal for the final report is to create and train our GAN to predic
 
 ## Resources Used
 - https://microsoft.github.io/malmo/0.30.0/Schemas/MissionHandlers.html#type_GridDefinition
+- http://microsoft.github.io/malmo/0.30.0/Documentation/
 - https://minecraft.gamepedia.com/Game_rule
 - https://www.youtube.com/watch?v=FEB8nUzwCSA&feature=youtu.be
-- http://microsoft.github.io/malmo/0.30.0/Documentation/
-- https://microsoft.github.io/malmo/0.21.0/Schemas/MissionHandlers.html
 - https://www.tensorflow.org/tutorials/generative/autoencoder
-- Malmo depth_map_runner.py sample
+- Malmo depth_map_runner.py sample program
 - Python packages: TensorFlow 2.1.0, Numpy 1.18.1, Pillow 5.4.1, Matplotlib 3.2.1
 
