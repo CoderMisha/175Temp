@@ -4,7 +4,7 @@ title: Status
 ---
 # {{page.title}}
 ## Video
-<iframe width="560" height="315" src="https://www.youtube.com/embed/FJj4-57lQ5E" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/H4Muk68iDLk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Project Summary
 The purpose of the project is to create an algorithm to remove villagers and other mobs from images in minecraft. Our machine learning model will be trained by feeding it an image containing villagers and other mobs matched with an image with all mobs removed, and it will be tasked with returning a new output image with the mobs erased and background filled in as if they were never there. This algorithm could be used to help players take screenshots of landscapes in minecraft without having to manually remove mobs beforehand, as well as extend to real life scenarios to remove people like tourists from pictures.
