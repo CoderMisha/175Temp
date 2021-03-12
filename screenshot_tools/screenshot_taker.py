@@ -7,6 +7,7 @@ import sys
 import time
 import json
 import numpy as np
+from PIL import Image
 from pynput.keyboard import Key, Controller
 
 if sys.version_info[0] == 2:
@@ -17,17 +18,15 @@ else:
 
 #fill in these parameters
 screenshot_counter = 1 #number to start counting screenshot names at
-current_user = "M" #Name attached to files so counters dont overlap (change this to your first initial/name)
+current_user = "Steve" #Name attached to files so counters dont overlap
 world_path = "" #path to world file, sometimes doesnt work and have to directly put in xml
-screenshots_path = "" #path to screenshot folder
 no_villagers_path = "" #path to folder of images without villagers
 villagers_path = "" #path to folder of images with villagers
-pixel_width = 256
-pixel_height = 256
-time_limit = 5000000
-port_number = 10000
+pixel_width = 512
+pixel_height = 512
+time_limit = 30000000 #time until auto end in milliseconds
+port_number = 10000 #change to be able to run multiple minecrafts
 
-#you have to have mouse in window for screenshot
 #change villager type / ammount / location to your liking
 #there are some checks for location
 
@@ -69,12 +68,11 @@ missionXML='''<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
                             <max x="3" y="1" z="1"/>
                         </Grid>
                         <Grid name="cliffCheck">
-                            <min x="10" y="-10" z="0"/>
-                            <max x="10" y="-10" z="0"/>
+                            <min x="6" y="-3" z="0"/>
+                            <max x="6" y="-3" z="0"/>
                         </Grid>
                     </ObservationFromGrid>                    
                     <ObservationFromFullStats/>
-                    <ContinuousMovementCommands turnSpeedDegs="180"/>
                     <VideoProducer>
                         <Width>''' + str(pixel_width) + '''</Width>
                         <Height>''' + str(pixel_height) + '''</Height>
@@ -128,70 +126,70 @@ while not world_state.has_mission_begun:
 
 print()
 print("Mission running ", end=' ')
-agent_host.sendCommand("chat /gamerule doMobSpawning false")  
-agent_host.sendCommand("chat /kill @e[type=!player]")  
+agent_host.sendCommand("chat /gamerule doMobSpawning false")
+agent_host.sendCommand("chat /gamerule doMobLoot false")   
+agent_host.sendCommand("chat /entitydata @e[type=!Player] {Health:0,DeathTime:19}") 
 time.sleep(5)
 
 # Loop until mission ends:
 while world_state.is_mission_running:
     x = np.random.randint(200, 9999)
     if np.random.randint(0,2) > 0:
-      x *= -1
+        x *= -1
     z = np.random.randint(200, 9999)
     if np.random.randint(0,2) > 0:
-      z *= -1
+        z *= -1
 
-    agent_host.sendCommand("chat /tp ~{} 90 ~{}".format(x,z))
+    agent_host.sendCommand("chat /tp ~{} 100 ~{}".format(x,z))
     agent_host.sendCommand("chat /weather clear")
-    time.sleep(1)
-    agent_host.sendCommand("chat /kill @e[type=!player,r=200]")  
-    time.sleep(1)
-    agent_host.sendCommand("chat /kill @e[type=!player,r=200]")
-    time.sleep(1)
+    time.sleep(2)
+    agent_host.sendCommand("chat /entitydata @e[type=!Player] {Health:0,DeathTime:19}")  
+    time.sleep(2)
     
     world_state = agent_host.getWorldState()
-    msg = world_state.observations[-1].text
-    observations = json.loads(msg)
+    try:
+        msg = world_state.observations[-1].text
+        observations = json.loads(msg)
+    except:
+        pass
+        
     playerSpace = observations.get('playerSpace',['water','water','water'])
     wallCheck = observations.get('wallCheck',['water'])
     cliffCheck = observations.get('cliffCheck',['air'])
     validLocation = True
 
     for block in wallCheck:
-      if block != 'air':
-        validLocation = False
-        break
+        if block != 'air':
+            validLocation = False
+            break
     
     if cliffCheck[0] == 'air':
-      validLocation = False
+        validLocation = False
 
-    if playerSpace[0] == 'leaves' or playerSpace[0] == 'air' or playerSpace[0] == 'water':
-       validLocation = False
+    if playerSpace[0] == 'leaves' or playerSpace[0] == 'air':
+        validLocation = False
 
-    if validLocation:
-      keyboard.press(Key.f2)
-      keyboard.release(Key.f2)
-      time.sleep(0.5)
+    if validLocation and len(world_state.video_frames) > 0:
+        frame = world_state.video_frames[-1]
+        im = Image.frombytes('RGB', (frame.width, frame.height), bytes(frame.pixels) )
+        im.save(no_villagers_path + '\\' + current_user + str(screenshot_counter) + "a.png")
+        time.sleep(0.5)
 
-      villagerLocations = []
-      for i in range(1,np.random.randint(4, 6)):
-          x = np.random.beta(4, 3)*10
-          z = np.random.normal(0, 2.5)
-          agent_host.sendCommand("chat /summon villager ~{} ~5 ~{} {{Rotation:[90f,0f], Profession:0}}".format(x,z))
-      time.sleep(2.5)
-      
-      keyboard.press(Key.f2)
-      keyboard.release(Key.f2)
-      time.sleep(0.5)
+        villagerLocations = []
+        for i in range(1,np.random.randint(3, 5)):
+            x = np.random.beta(4, 3)*10
+            z = np.random.normal(0, 2.5)
+            agent_host.sendCommand("chat /summon villager ~{} ~5 ~{} {{Rotation:[90f,0f], Profession:1}}".format(x,z))
+        time.sleep(3)
 
-      for fileNum, filename in enumerate(os.listdir(screenshots_path)):
-        src = screenshots_path + '\\' + filename
-        if fileNum == 0:
-          dst = no_villagers_path + '\\' + current_user + str(screenshot_counter) + "a.png"
-        else:
-          dst = villagers_path + '\\' + current_user + str(screenshot_counter) + "b.png"
-        shutil.move(src, dst)
-      screenshot_counter += 1
+        world_state = agent_host.getWorldState()
+        if len(world_state.video_frames) > 0:
+            frame = world_state.video_frames[-1]
+            im = Image.frombytes('RGB', (frame.width, frame.height), bytes(frame.pixels) )
+            im.save(villagers_path + '\\' + current_user + str(screenshot_counter) + "b.png")
+            time.sleep(0.5)
+            screenshot_counter += 1
+
     world_state = agent_host.getWorldState()
     for error in world_state.errors:
         print("Error:",error.text)
