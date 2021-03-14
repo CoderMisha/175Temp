@@ -22,8 +22,8 @@ current_user = "Steve" #Name attached to files so counters dont overlap
 world_path = "" #path to world file, sometimes doesnt work and have to directly put in xml
 no_villagers_path = "" #path to folder of images without villagers
 villagers_path = "" #path to folder of images with villagers
-pixel_width = 512
-pixel_height = 512
+pixel_width = 256
+pixel_height = 256
 time_limit = 30000000 #time until auto end in milliseconds
 port_number = 10000 #change to be able to run multiple minecrafts
 
