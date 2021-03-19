@@ -64,10 +64,10 @@ if __name__ == '__main__':
     #plt.plot(h.history['mean_squared_error'], label='mse')
     plt.xlabel('Epoch')
     plt.ylabel('Accuracy')
-    plt.ylim([.7, 1])
+    plt.ylim([.5, 1])
     plt.legend(loc='lower right')
     plt.title('Training Accuracy')
-    plt.savefig('accuracy.png')
+    plt.savefig('accuracy_CAE.png')
 
     #save some image reconstructions
     fig,axes = plt.subplots(2, 3, sharey=True)
@@ -80,3 +80,4 @@ if __name__ == '__main__':
     axes[1][0].imshow(xdata_test[1])
     axes[1][1].imshow(ydata_test[1])
     axes[1][2].imshow(tf.reshape(model(tf.reshape(xdata_test[1], (1,256,256,3))), (256,256,3)))
+    plt.savefig('reconstructions_CAE.png')
