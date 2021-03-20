@@ -3,9 +3,9 @@ layout: default
 title:  Home
 ---
 ## Project Description:
-### The goal of this project is to create a machine learning algorithm that will be able to remove villagers and other mobs from images taken in minecraft.
+### The goal of this project is to create a machine learning model to remove villagers from images taken in minecraft. We want to be able to input an image containing villagers into the model, and have it output an image with no villagers and the background reconstructed as if they were never there.
 
-![Villager Eraser Before After](assets/Before_After_Eraser.png)
+![Villager Eraser Before After](assets/before_after_eraser.png)
 
 ## Explore our Progress:
 - ### [Proposal](proposal.html)
