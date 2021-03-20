@@ -2,7 +2,7 @@
 layout: default
 title:  Home
 ---
-## Project Description
+## Project Description:
 ### The goal of this project is to create a machine learning algorithm that will be able to remove villagers and other mobs from images taken in minecraft.
 
 ![Villager Eraser Before After](assets/Before_After_Eraser.png)
