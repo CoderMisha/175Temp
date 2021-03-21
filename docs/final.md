@@ -43,7 +43,7 @@ The generator loss function is a combination of the sigmoid cross-entropy betwee
 
 And L1 loss (MAE) is given by the equation:
 
-![MAE](https://latex.codecogs.com/gif.latex?MAE&space;=&space;\dfrac{\sum_{i=1}^n|y_i-x_i|}{n})
+![MAE](https://latex.codecogs.com/gif.latex?MAE&space;=&space;\dfrac{\sum_{i=1}^nabs(y_i-x_i)}{n})
 
 The actual formula for the full generator loss is: total_gen_loss = gan_loss + LAMBDA * l1_loss, where LAMBDA is typically set to 100.
 
