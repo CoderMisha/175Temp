@@ -39,9 +39,9 @@ The generator follows a similar structure to a modified U-Net, where each downsa
 
 The generator loss function is a combination of the sigmoid cross-entropy between the output image and an array of ones, along with L1 regularization. The sigmoid binary cross-entropy is given by the formula:
 
-![BCE](https://latex.codecogs.com/gif.latex?-y\ln\hat{y}&space;-&space;(1-y)\ln(1-\hat{y}))
+![BCE](https://latex.codecogs.com/gif.latex?H(p,q)&space;=&space;-\sum_ip_i\log{q_i}&space;=&space;-y\ln\hat{y}&space;-&space;(1-y)\ln(1-\hat{y}))
 
-And L1 loss is given by the equation:
+And L1 loss (MAE) is given by the equation:
 
 ![MAE](https://latex.codecogs.com/gif.latex?MAE&space;=&space;\dfrac{\sum_{i=1}^n|y_i-x_i|}{n})
 
