@@ -73,7 +73,7 @@ As mentioned earlier, our CAE model was tested on 25% of our collected data that
 
 *Fig.2 Binary pixel accuracy and MSE of the CAE over its 1000 training epochs.*
 
-### Qualitatvie
+### Qualitative
 
 Additionally, we also visually inspected the recreated images and compared them to the expected result to see how the model was improving and how effective the output was to a human observer, as the whole premise of the project is to remove mobs from screenshots to help people create better and less cluttered images.
 
