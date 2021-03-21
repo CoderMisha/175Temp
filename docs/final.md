@@ -31,19 +31,19 @@ Our second model we developed was a conditional generative adversarial network b
 
 The generator follows a similar structure to a modified U-Net, where each downsampling block is composed of three layers: a convolutional layer, a batch normalization layer, and a leaky ReLU layer. The upsampling blocks have four layers: a transposed convolutional layer, a batch normalization layer, an optional dropout layer (typically applied to the first couple layers in the decoder), and a ReLU layer. The downsampling blocks compose the generator’s encoder, while the generator’s decoder is made up of the upsampling blocks. Skip connections are implemented between layers in the encoder and decoder as in any typical U-Net.
 
-<img src="assets/gen_architecture.png" height=75% width=75%>
+![](assets/gen_architecture.png)
 
 The generator loss function is a combination of the sigmoid cross-entropy between the output image and an array of ones, along with L1 regularization. The actual formula is total_gen_loss = gan_loss + LAMBDA * l1_loss, where LAMBDA is typically set to 100.
 
-<img src="assets/gen_loss_diagram.png" height=50% width=50%>
+![](assets/gen_loss_diagram.png)
 
 The discriminator is a PatchGAN, which specializes in penalizing image structure in relation to local image patches. As it is run convolutionally across the image, it tries to determine whether each n x n patch is real or fake, and averages the result to get the final output. Each discriminator block is made up of a convolutional layer, a batch normalization layer, and a leaky ReLU layer, just like the downsampling blocks from the generator. 
 
-<img src="assets/dis_architecture.png" height=50% width=50%>
+![](assets/dis_architecture.png")
 
 The discriminator loss function is the sum of the sigmoid cross-entropy between the real images and an array of ones and the sigmoid cross-entropy between the fake images and an array of zeros.
 
-<img src="assets/dis_loss_diagram.png" height=50% width=50%>
+![](assets/dis_loss_diagram.png")
 
 While a GAN trains slower, uses more memory, and requires a bit more data compared to the CAE due to its increased complexity, it is able to produce much clearer images by retaining the areas of the image which do not change unlike the CAE.
 
@@ -53,3 +53,22 @@ A SAGAN is a GAN augmented with attention layers and spectral normalization in i
 
 ## Evaluation
 
+### Quantitative
+
+As mentioned earlier, our CAE model was tested on 25% of our collected data that we set aside to evaluate its performance. Our two main quantitative metrics we used to evaluate the convolutional autoencoder’s performance were binary accuracy between image pixels and mean squared error between the expected and reconstructed images. One point of evaluation was checking the recorded accuracy and mean squared error values we recorded during our training epochs to ensure the model was training properly, showing clear progress, and was not overfitting or underfitting the data.
+
+![Accuracy2k](assets/Accuracy2k.PNG) ![MSE2k](assets/MSE.PNG)
+
+*Fig.2 Binary pixel accuracy and MSE of the CAE over its 1000 training epochs.*
+
+### Qualitatvie
+
+Additionally, we also visually inspected the recreated images and compared them to the expected result to see how the model was improving and how effective the output was to a human observer, as the whole premise of the project is to remove mobs from screenshots to help people create better and less cluttered images.
+
+![SampleCAE18](assets/SampleCAE18.PNG)
+
+*Fig.3 Sample input, expected, and reconstructed output images from the CAE testing.*
+
+Our GAN images were much clearer and  more representative of what one would expect from removing a Minecraft mob. While the CAE struggled with detail loss, noise, and compression when it tried to output sharp images, the GAN was able to capture the original image details flawlessly, minus the exact silhouette where the mobs resided, which had some slightly noticeable pixelation. 
+
+*images and stuff for GAN*
