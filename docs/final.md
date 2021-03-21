@@ -35,7 +35,9 @@ Our second model we developed was a conditional generative adversarial network b
 
 The generator follows a similar structure to a modified U-Net, where each downsampling block is composed of three layers: a convolutional layer, a batch normalization layer, and a leaky ReLU layer. The upsampling blocks have four layers: a transposed convolutional layer, a batch normalization layer, an optional dropout layer (typically applied to the first couple layers in the decoder), and a ReLU layer. The downsampling blocks compose the generator’s encoder, while the generator’s decoder is made up of the upsampling blocks. Skip connections are implemented between layers in the encoder and decoder as in any typical U-Net.
 
-<img src="https://github.com/CoderMisha/Mob-Eraser/blob/main/docs/assets/gen_architecture.png" height=50% width=50%>
+![](assets/gen_architecture.png){:height="50%" width="50%"}
+
+*Fig.1 Architecture of the U-Net Generator in our GAN.*
 
 The generator loss function is a combination of the sigmoid cross-entropy between the output image and an array of ones, along with L1 regularization. The sigmoid binary cross-entropy is given by the formula:
 
@@ -49,19 +51,35 @@ The actual formula for the full generator loss is: total_gen_loss = gan_loss + L
 
 ![](assets/gen_loss_diagram.png){:height="50%" width="50%"}
 
+*Fig.2 Computational graph of how the Generator loss is calculated.*
+
 The discriminator is a PatchGAN, which specializes in penalizing image structure in relation to local image patches. As it is run convolutionally across the image, it tries to determine whether each n x n patch is real or fake, and averages the result to get the final output. Each discriminator block is made up of a convolutional layer, a batch normalization layer, and a leaky ReLU layer, just like the downsampling blocks from the generator. 
 
 ![](assets/dis_architecture.png){:height="50%" width="50%"}
+
+*Fig.3 Architecture of the PatchGAN Discriminator in our GAN.*
 
 The discriminator loss function is the sum of the sigmoid cross-entropy between the real images and an array of ones and the sigmoid cross-entropy between the fake images and an array of zeros.
 
 ![](assets/dis_loss_diagram.png){:height="50%" width="50%"}
 
-While a GAN trains slower, uses more memory, and requires a bit more data compared to the CAE due to its increased complexity, it is able to produce much clearer images by retaining the areas of the image which do not change unlike the CAE.
+*Fig.4 Computational graph of how the Discriminator loss is calculated.*
+
+While a GAN trains significantly slower, uses much more memory, and requires a bit more data compared to the CAE due to its increased complexity, it is able to produce much clearer images by retaining the areas of the image which do not change unlike the CAE.
 
 ### Self-Attention Generative Adversarial Network (SAGAN)
 
 A SAGAN is a GAN augmented with attention layers and spectral normalization in its convolutional and convolutional transposition layers. Typical convolutional networks are constrained by filter size in their ability to represent image data, but the attention layers enable the generator and discriminator to model relations between spatial regions and capture global dependencies. Often this results in better detail handling and GAN performance.
+
+Each attention layer starts by taking an input tensor of convolution feature maps and creating three copies using a 1x1 convolution corresponding to the key, value, and query. The key is transposed and mutiplied by the query, and the result is fed to a softmax to produce the attention map. This mapping is then multiplied by the value and passed through a final 1x1 convolution to result in an output tensor that represents the new attention feature maps.
+
+![](assets/attention_layer.png)
+
+*Fig.5 Architecture of an attention layer.*
+
+Spectral Normalization is a weight normalization technique that attempts to mitigate standard problems GANs often face, most typically the expoding gradient and mode collapse problems. This method stabilizes the GAN training epochs by controlling the Lipschitz constant of the discriminator. Spectral normalization normalizes the weight for each layer with the spectral norm, forcing the Lipschitz constant for each layer and the whole network to be equal to one. In doing so, the gradient is prevented from changing drastically and pulling the GAN away from reasonable values.
+
+Compared with our previous GAN, the SAGAN performed very slightly better, likely due to its inherant ability to map relations between larger spatial regions than the limited kernel size of the convolutional layers, so it was able to understand more of the "rules" behind how the images are constructed and better
 
 ## Evaluation
 
@@ -71,26 +89,30 @@ As mentioned earlier, our CAE model was tested on 25% of our collected data that
 
 ![Accuracy2k](assets/Accuracy2k.PNG) ![MSE2k](assets/MSE.PNG)
 
-*Fig.2 Binary pixel accuracy and MSE of the CAE over its 1000 training epochs.*
+*Fig.6 Binary pixel accuracy and MSE of the CAE over its 1000 training epochs.*
+
+From the above diagrams, we can see that the accuracy and MSE kept improving, but significantly tapered off after around 450 epochs, meaning the returns for each epoch were minimal, so we began to slightly overfit the training data. If we continued to train the CAE for more epochs, we would overfit the training data more and more, which would cause serious problems when we attempted to run the model on non-training data, like out testing dataset.
+
+As for the GAN models, we monitored the four loss criteria we outlined in the preceding discussion. The loss criteria we monitored for the generator were gen_total_loss, or the total GAN generator loss, gen_gan_loss, or the cross-entropy loss from the generated image and ones, and gen_l1_loss, or the l1 regularized loss between the gan image and target. The loss criteria for the discriminator was disc_loss, or the total GAN discriminator loss. We expected that the values of gen_l1_loss and gen_total_loss would keep decreasing, similar to the accuracy or MSE from the CAE. 
 
 ### Qualitative
 
-Additionally, we also visually inspected the recreated images and compared them to the expected result to see how the model was improving and how effective the output was to a human observer, as the whole premise of the project is to remove mobs from screenshots to help people create better and less cluttered images.
+Additionally, we also visually inspected the recreated images and compared them to the expected result to see how the model was improving and how effective the output was to a human observer, as the whole premise of the project is to remove mobs from screenshots to help people create better and less cluttered images. The CAE images serve as a great functional baseline for our image reconstruction, as they sucessfully remove the mob from the image and fill in the missing portion in a similar manner to which the surrounding environment looks like.
 
 ![SampleCAE18](assets/SampleCAE18.PNG)
 
-*Fig.3 Sample input, expected, and reconstructed output images from the CAE testing.*
+*Fig.7 Sample input, expected, and reconstructed output images from the CAE testing.*
 
-Our GAN images were much clearer and  more representative of what one would expect from removing a Minecraft mob. While the CAE struggled with detail loss, noise, and compression when it tried to output sharp images, the GAN was able to capture the original image details flawlessly, minus the exact silhouette where the mobs resided, which had some slightly noticeable pixelation. 
+However, our GAN images were much clearer and more representative of what one would expect from removing a Minecraft mob. While the CAE struggled with detail loss, noise, and compression when it tried to output sharp images, the GAN was able to capture the original image details flawlessly, minus the exact silhouette where the mobs resided, which had some slightly noticeable pixelation. 
 
 ![](assets/gan_img_2.PNG)
 
-*Fig. 4 Sample input, expected, and reconstructed output images from the GAN testing.*
+*Fig.8 Sample input, expected, and reconstructed output images from the GAN testing.*
 
-Directly comparing the images produced by the CAE (top) and the GAN (bottom) easily illustrates the disparity in effictively reproducing the images.
+Directly comparing the images produced by the CAE (top) and the even better SAGAN (bottom) easily illustrates the disparity in effictively reproducing the images. The CAE images successfully removed the mobs and generated new background where they once were, but the entire reconstructed image comes out pixelated and noisy. In contrast, the SAGAN images are sharp and clear, with very little errors where the mobs once were. The difference in feature representation is due to the complexity and abilties of the two different models. The CAE is great for dimensionality reduction, image denoising, and anomaly detection on small images, but the GAN, especially the Pix2Pix architecture, was specifically designed to translated between images, and was suited perfectly to our task, and it shows in the results.
 
 ![](assets/CAE_img_1.PNG)
 
 ![](assets/gan_img_3.PNG)
 
-*Fig.5 Input, target, and output for the CAE (top) and GAN (bottom).*
+*Fig.9 Input, target, and output for the CAE (top) and SAGAN (bottom).*
