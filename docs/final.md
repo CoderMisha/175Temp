@@ -77,7 +77,7 @@ A SAGAN is a GAN augmented with attention layers and spectral normalization in i
 
 Each attention layer starts by taking an input tensor of convolution feature maps and creating three copies using a 1x1 convolution corresponding to the key, value, and query. The key is transposed and mutiplied by the query, and the result is fed to a softmax to produce the attention map. This mapping is then multiplied by the value and passed through a final 1x1 convolution to result in an output tensor that represents the new attention feature maps.
 
-![](assets/attention_layer.png)
+![](assets/attention_layer.png){:height="50%" width="50%"}
 
 *Fig.6 Architecture of an attention layer.*
 
@@ -97,7 +97,15 @@ As mentioned earlier, our CAE model was tested on 25% of our collected data that
 
 From the above diagrams, we can see that the accuracy and MSE kept improving, but significantly tapered off after around 450 epochs, meaning the returns for each epoch were minimal, so we began to slightly overfit the training data. If we continued to train the CAE for more epochs, we would overfit the training data more and more, which would cause serious problems when we attempted to run the model on non-training data, like out testing dataset.
 
-As for the GAN models, we monitored the four loss criteria we outlined in the preceding discussion. The loss criteria we monitored for the generator were gen_total_loss, or the total GAN generator loss, gen_gan_loss, or the cross-entropy loss from the generated image and ones, and gen_l1_loss, or the l1 regularized loss between the gan image and target. The loss criteria for the discriminator was disc_loss, or the total GAN discriminator loss. We expected that the values of gen_l1_loss and gen_total_loss would keep decreasing, similar to the accuracy or MSE from the CAE. 
+As for the GAN models, we monitored the four loss criteria we outlined in the preceding discussion. The loss criteria we monitored for the generator were gen_total_loss, or the total GAN generator loss, gen_gan_loss, or the cross-entropy loss from the generated image and ones, and gen_l1_loss, or the l1 regularized loss between the gan image and target. The loss criteria for the discriminator was disc_loss, or the total GAN discriminator loss. We expected that the values of gen_l1_loss and gen_total_loss would keep decreasing, similar to the accuracy or MSE from the CAE.
+
+![](assets/gen_gan_loss.PNG) ![](assets/disc_loss.PNG)
+
+![](assets/gen_l1_loss.PNG) ![](assets/gen_total_loss.PNG)
+
+*Fig.8 (Clockwise from top left) Gen_gan_loss, disc_loss, gen_total_loss, gen_l1_loss.*
+
+As we trained the model, we looked for specific details in the above graphs to check whether the GANs were behaving properly. First, we checked to make sure there was no drastic difference between the gen_gan_loss and disc_loss, since if either loss became very small, it would indicate that one model was dominating the other and the GAN is not trainign properly. We also checked that these losses were around the value 0.69, since this value indicates a preplexity of 2, meaning that specific model had a 50% chance of fooling the other model. Any value lower would indicate that the model was doing better than random, and any value higher indicated the opposite. Our gen_gan_loss ended up around 0.70, which means it was pretty close to fooling the discriminator 50% of the time, which is right where we wanted it. The disc_loss settled around 1.4, meaning it was doing slightly worse than random on the combined set of real and fake images, which isn't excatly ideal, but is not too unordinary that it caused concern. Gen_l1_loss followed the expected trajectory of decreasing as time went on, and since gen_total_loss is the sum of gen_gan_loss and gen_l1_loss, it also decreased as expected. Ultimately, our GAN model trained well and mostly met with our expectation regarding it numerical performance.
 
 ### Qualitative
 
@@ -105,13 +113,13 @@ Additionally, we also visually inspected the recreated images and compared them 
 
 ![SampleCAE18](assets/SampleCAE18.PNG)
 
-*Fig.8 Sample input, expected, and reconstructed output images from the CAE testing.*
+*Fig.9 Sample input, expected, and reconstructed output images from the CAE testing.*
 
 However, our GAN images were much clearer and more representative of what one would expect from removing a Minecraft mob. While the CAE struggled with detail loss, noise, and compression when it tried to output sharp images, the GAN was able to capture the original image details flawlessly, minus the exact silhouette where the mobs resided, which had some slightly noticeable pixelation. 
 
 ![](assets/gan_img_2.PNG)
 
-*Fig.9 Sample input, expected, and reconstructed output images from the GAN testing.*
+*Fig.10 Sample input, expected, and reconstructed output images from the GAN testing.*
 
 Directly comparing the images produced by the CAE (top) and the even better SAGAN (bottom) easily illustrates the disparity in effictively reproducing the images. The CAE images successfully removed the mobs and generated new background where they once were, but the entire reconstructed image comes out pixelated and noisy. In contrast, the SAGAN images are sharp and clear, with very little errors where the mobs once were. The difference in feature representation is due to the complexity and abilties of the two different models. The CAE is great for dimensionality reduction, image denoising, and anomaly detection on small images, but the GAN, especially the Pix2Pix architecture, was specifically designed to translated between images, and was suited perfectly to our task, and it shows in the results.
 
@@ -119,4 +127,4 @@ Directly comparing the images produced by the CAE (top) and the even better SAGA
 
 ![](assets/gan_img_3.PNG)
 
-*Fig.10 Input, target, and output for the CAE (top) and SAGAN (bottom).*
+*Fig.11,12 Input, target, and output for the CAE (top) and SAGAN (bottom).*
