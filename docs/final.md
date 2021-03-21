@@ -73,7 +73,7 @@ While a GAN trains significantly slower, uses much more memory, and requires a b
 
 ### Self-Attention Generative Adversarial Network (SAGAN)
 
-A SAGAN is a GAN augmented with attention layers and spectral normalization in its convolutional and convolutional transposition layers. Typical convolutional networks are constrained by filter size in their ability to represent image data, but the attention layers enable the generator and discriminator to model relations between spatial regions and capture global dependencies. Often this results in better detail handling and GAN performance.
+A SAGAN is a GAN augmented with attention layers and spectral normalization in its convolutional and transposed convolutional layers. Typical convolutional networks are constrained by filter size in their ability to represent image data, but the attention layers enable the generator and discriminator to model relations between spatial regions and capture global dependencies. Often this results in better detail handling and GAN performance.
 
 Each attention layer starts by taking an input tensor of convolution feature maps and creating three copies using a 1x1 convolution corresponding to the key, value, and query. The key is transposed and mutiplied by the query, and the result is fed to a softmax to produce the attention map. This mapping is then multiplied by the value and passed through a final 1x1 convolution to result in an output tensor that represents the new attention feature maps.
 
@@ -130,3 +130,18 @@ Directly comparing the images produced by the CAE (top) and the even better SAGA
 *Fig.11,12 Input, target, and output for the CAE (top) and SAGAN (bottom).*
 
 ## Resources
+https://microsoft.github.io/malmo/0.30.0/Schemas/MissionHandlers.html#type_GridDefinition
+http://microsoft.github.io/malmo/0.30.0/Documentation/
+https://minecraft.gamepedia.com/Game_rule
+https://www.youtube.com/watch?v=FEB8nUzwCSA&feature=youtu.be
+https://microsoft.github.io/malmo/0.17.0/Documentation/structmalmo_1_1_world_state.html#a2d2c915c1aa01eb3856924b35ae02591
+https://www.tensorflow.org/tutorials/generative/autoencoder
+https://www.tensorflow.org/tutorials/generative/dcgan
+https://www.tensorflow.org/tutorials/generative/pix2pix
+https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html#self-attention-gan
+https://jonathan-hui.medium.com/gan-spectral-normalization-893b6a4e8f53
+https://arxiv.org/abs/1802.05957
+https://arxiv.org/abs/1805.08318
+Malmo depth_map_runner.py sample program
+Python version 3.7.2
+Python packages: TensorFlow 2.1.0, Numpy 1.18.1, Pillow 5.4.1, Matplotlib 3.2.1, Notebook 6.0.3
