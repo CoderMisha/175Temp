@@ -21,7 +21,11 @@ The first step to accomplish was to gather a large dataset of paired images to t
 
 ### Convolutional Autoencoder (CAE)
 
-For our initial model, we created a convolutional autoencoder as a baseline to perform our task. In our model, the encoder took an (256,256,3) tensor as input and was made up of several Conv2D layers with increasing filter size and stride 2 and kernel (2,2), to help with checkerboarding in the reconstruction. The output of the convolutions was then flattened and went through two dense layers to arrive at our compressed latent space representation, which we chose to set at a dimension of 256. The models decoder structure took this latent space vector and passed it through a couple dense layers, and then through some Conv2DTranspose layers that mirrored the encoder’s Conv2D layers and upscaled the compressed representation, resulting in a reconstructed image of the same size, (256,256,3). Our model was compiled with the Adam optimizer with a learning rate of 0.001 and the mean squared error loss function. The model was then trained with 75% of our collected data for 1000 epochs, where validation was performed using the remaining 25% of the data. As the model trained, we recorded the accuracy and mean squared error for each epoch.
+For our initial model, we created a convolutional autoencoder as a baseline to perform our task. In our model, the encoder took an (256,256,3) tensor as input and was made up of several Conv2D layers with increasing filter size and stride 2 and kernel (2,2), to help with checkerboarding in the reconstruction. The output of the convolutions was then flattened and went through two dense layers to arrive at our compressed latent space representation, which we chose to set at a dimension of 256. The models decoder structure took this latent space vector and passed it through a couple dense layers, and then through some Conv2DTranspose layers that mirrored the encoder’s Conv2D layers and upscaled the compressed representation, resulting in a reconstructed image of the same size, (256,256,3). Our model was compiled with the Adam optimizer with a learning rate of 0.001 and the mean squared error loss function: 
+
+![MSE](https://latex.codecogs.com/gif.latex?MSE&space;=&space;\dfrac{1}{n}\sum^n_{i=1}(Y_i-\hat{Y_i}))
+
+The model was then trained with 75% of our collected data for 1000 epochs, where validation was performed using the remaining 25% of the data. As the model trained, we recorded the accuracy and mean squared error for each epoch.
 
 This convolutional autoencoder served as a good baseline model. For the same amount of data that was given to all the models to train and test them, the CAE trained much faster and used less memory. However, the CAE was more prone to overfit the training data, and its images both had a higher error quantitatively, and qualitatively there was a noticeable difference in image clarity, resolution, and sharpness between the CAE and GAN.
 
@@ -31,9 +35,17 @@ Our second model we developed was a conditional generative adversarial network b
 
 The generator follows a similar structure to a modified U-Net, where each downsampling block is composed of three layers: a convolutional layer, a batch normalization layer, and a leaky ReLU layer. The upsampling blocks have four layers: a transposed convolutional layer, a batch normalization layer, an optional dropout layer (typically applied to the first couple layers in the decoder), and a ReLU layer. The downsampling blocks compose the generator’s encoder, while the generator’s decoder is made up of the upsampling blocks. Skip connections are implemented between layers in the encoder and decoder as in any typical U-Net.
 
-![gen_arch](assets/gen_architecture.png){:height="50%" width="50%}
+![](assets/gen_architecture.png){:height="50%" width="50%}
 
-The generator loss function is a combination of the sigmoid cross-entropy between the output image and an array of ones, along with L1 regularization. The actual formula is total_gen_loss = gan_loss + LAMBDA * l1_loss, where LAMBDA is typically set to 100.
+The generator loss function is a combination of the sigmoid cross-entropy between the output image and an array of ones, along with L1 regularization. The sigmoid binary cross-entropy is given by the formula:
+
+![BCE](https://latex.codecogs.com/gif.latex?-y\ln\hat{y}&space;-&space;(1-y)\ln(1-\hat{y}))
+
+And L1 loss is given by the equation:
+
+![MAE](https://latex.codecogs.com/gif.latex?MAE&space;=&space;\dfrac{\sum_{i=1}^n|y_i-x_i|}{n})
+
+The actual formula for the full generator loss is: total_gen_loss = gan_loss + LAMBDA * l1_loss, where LAMBDA is typically set to 100.
 
 ![](assets/gen_loss_diagram.png){:height="50%" width="50%"}
 
@@ -71,4 +83,14 @@ Additionally, we also visually inspected the recreated images and compared them 
 
 Our GAN images were much clearer and  more representative of what one would expect from removing a Minecraft mob. While the CAE struggled with detail loss, noise, and compression when it tried to output sharp images, the GAN was able to capture the original image details flawlessly, minus the exact silhouette where the mobs resided, which had some slightly noticeable pixelation. 
 
-*images and stuff for GAN*
+![](assets/gan_img_2.PNG)
+
+*Fig. 4 Sample input, expected, and reconstructed output images from the GAN testing.*
+
+Directly comparing the images produced by the CAE (top) and the GAN (bottom) easily illustrates the disparity in effictively reproducing the images.
+
+![](assets/CAE_img_1.PNG)
+
+![](assets/gan_img_3.PNG)
+
+*Fig.5 Input, target, and output for the CAE (top) and GAN (bottom).*
