@@ -128,18 +128,18 @@ Directly comparing the images produced by the CAE (top) and the even better SAGA
 *Fig.11 Input, target, and output for the CAE (third column) and SAGAN (fourth column).*
 
 ## Resources
-https://microsoft.github.io/malmo/0.30.0/Schemas/MissionHandlers.html#type_GridDefinition
-http://microsoft.github.io/malmo/0.30.0/Documentation/
-https://minecraft.gamepedia.com/Game_rule
-https://www.youtube.com/watch?v=FEB8nUzwCSA&feature=youtu.be
-https://microsoft.github.io/malmo/0.17.0/Documentation/structmalmo_1_1_world_state.html#a2d2c915c1aa01eb3856924b35ae02591
-https://www.tensorflow.org/tutorials/generative/autoencoder
-https://www.tensorflow.org/tutorials/generative/dcgan
-https://www.tensorflow.org/tutorials/generative/pix2pix
-https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html#self-attention-gan
-https://jonathan-hui.medium.com/gan-spectral-normalization-893b6a4e8f53
-https://arxiv.org/abs/1802.05957
-https://arxiv.org/abs/1805.08318
-Malmo depth_map_runner.py sample program
-Python version 3.7.2
-Python packages: TensorFlow 2.1.0, Numpy 1.18.1, Pillow 5.4.1, Matplotlib 3.2.1, Notebook 6.0.3
+- https://microsoft.github.io/malmo/0.30.0/Schemas/MissionHandlers.html#type_GridDefinition
+- http://microsoft.github.io/malmo/0.30.0/Documentation/
+- https://minecraft.gamepedia.com/Game_rule
+- https://www.youtube.com/watch?v=FEB8nUzwCSA&feature=youtu.be
+- https://microsoft.github.io/malmo/0.17.0/Documentation/structmalmo_1_1_world_state.html#a2d2c915c1aa01eb3856924b35ae02591
+- https://www.tensorflow.org/tutorials/generative/autoencoder
+- https://www.tensorflow.org/tutorials/generative/dcgan
+- https://www.tensorflow.org/tutorials/generative/pix2pix
+- https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html#self-attention-gan
+- https://jonathan-hui.medium.com/gan-spectral-normalization-893b6a4e8f53
+- https://arxiv.org/abs/1802.05957
+- https://arxiv.org/abs/1805.08318
+- Malmo depth_map_runner.py sample program
+- Python version 3.7.2
+- Python packages: TensorFlow 2.1.0, Numpy 1.18.1, Pillow 5.4.1, Matplotlib 3.2.1, Notebook 6.0.3
