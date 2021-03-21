@@ -7,12 +7,14 @@ title:  Home
 
 ![Villager Eraser Before After](assets/before_after_eraser.png)
 
+![](assets/gan_img_3.PNG)
+
 ## Explore our Progress:
 - ### [Proposal](proposal.html)
 - ### [Status](status.html)
 - ### [Final](final.html)
 
-![Sample_Images](assets/SampleCAE18.PNG)
+![Sample_Images](assets/gan_img_2.PNG)
 
 ## Source code:
 ### [https://github.com/CoderMisha/Mob-Eraser](https://github.com/CoderMisha/Mob-Eraser)
