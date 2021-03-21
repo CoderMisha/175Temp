@@ -123,11 +123,9 @@ However, our GAN images were much clearer and more representative of what one wo
 
 Directly comparing the images produced by the CAE (top) and the even better SAGAN (bottom) easily illustrates the disparity in effictively reproducing the images. The CAE images successfully removed the mobs and generated new background where they once were, but the entire reconstructed image comes out pixelated and noisy. In contrast, the SAGAN images are sharp and clear, with very little errors where the mobs once were. The difference in feature representation is due to the complexity and abilties of the two different models. The CAE is great for dimensionality reduction, image denoising, and anomaly detection on small images, but the GAN, especially the Pix2Pix architecture, was specifically designed to translated between images, and was suited perfectly to our task, and it shows in the results.
 
-![](assets/CAE_img_1.PNG)
+![](assets/CAE_SAGAN_compare.PNG)
 
-![](assets/gan_img_3.PNG)
-
-*Fig.11,12 Input, target, and output for the CAE (top) and SAGAN (bottom).*
+*Fig.11 Input, target, and output for the CAE (third column) and SAGAN (fourth column).*
 
 ## Resources
 https://microsoft.github.io/malmo/0.30.0/Schemas/MissionHandlers.html#type_GridDefinition
