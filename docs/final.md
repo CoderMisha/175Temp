@@ -73,7 +73,7 @@ While a GAN trains significantly slower, uses much more memory, and requires a b
 
 ### Self-Attention Generative Adversarial Network (SAGAN)
 
-A SAGAN is a GAN augmented with attention layers and spectral normalization in its convolutional and transposed convolutional layers. Typical convolutional networks are constrained by filter size in their ability to represent image data, but the attention layers enable the generator and discriminator to model relations between spatial regions and capture global dependencies. Often this results in better detail handling and GAN performance.
+The third and most sucessful model we created was a SAGAN. A SAGAN is a GAN augmented with attention layers and spectral normalization in its convolutional and transposed convolutional layers. Typical convolutional networks are constrained by filter size in their ability to represent image data, but the attention layers enable the generator and discriminator to model relations between spatial regions and capture global dependencies. Often this results in better detail handling and GAN performance.
 
 Each attention layer starts by taking an input tensor of convolution feature maps and creating three copies using a 1x1 convolution corresponding to the key, value, and query. The key is transposed and mutiplied by the query, and the result is fed to a softmax to produce the attention map. This mapping is then multiplied by the value and passed through a final 1x1 convolution to result in an output tensor that represents the new attention feature maps.
 
