@@ -7,7 +7,7 @@ title:  Home
 
 ![Villager Eraser Before After](assets/before_after_eraser.png)
 
-## Sample Images from our GAN
+## Sample Images from our GAN:
 ![](assets/gan_img_3.PNG)
 
 ## Explore our Progress:
